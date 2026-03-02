@@ -8,5 +8,4 @@ def openfile(path):
 
 
 # Replace path with your own txt file
-content = openfile('../test.txt')
-print(content)
+content = openfile('../gutenberg.txt')
