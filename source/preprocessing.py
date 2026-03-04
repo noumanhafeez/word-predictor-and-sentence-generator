@@ -43,7 +43,7 @@ def preprocess(text):
 
 
 
-clean_text = preprocess(content)
+tokens = preprocess(content)
 
 # You can see the clean text. For this, uncomment the below line and run to see clean text.
 #print(clean_text)
