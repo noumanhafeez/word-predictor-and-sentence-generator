@@ -1,5 +1,5 @@
 from preprocessing import tokens
-
+from collections import Counter
 
 def unigram(content):
     unigram = content
@@ -22,9 +22,13 @@ def trigrams(content):
 
 
 uni = unigram(tokens)
-print(uni)
+#print(uni)
 
 bi = bigrams(tokens)
 #print(bi)
 trig = trigrams(tokens)
 #print(trig)
+
+trig_freq = Counter(trig)   # trig is your list of trigrams
+bi_freq = Counter(bi)       # bi is your list of bigrams
+uni_freq = Counter(uni)
