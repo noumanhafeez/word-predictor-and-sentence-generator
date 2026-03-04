@@ -1,35 +1,49 @@
 import re
-import string
-
 from data_ingestion import content
 
-def clean_text(text):
 
-    # lower text
+def preprocess(text):
+
+
+    # 1. Remove Project Gutenberg header
+    text = re.sub(r"The Project Gutenberg.*SAM'L GABRIEL SONS & COMPANY\s+NEW YORK", '', text, flags=re.I | re.S)
+
+    # 2. Remove Project Gutenberg footer (everything after [Illustration] or END marker)
+    text = re.sub(r"\*\*\* end of the project.*", '', text, flags=re.I | re.S)
+
+    # 3. Lowercase
     text = text.lower()
 
-    # remove links
-    text = re.sub('www\.\S+', '', text)
+    # 4. Replace newlines and tabs with space
+    text = re.sub(r'\s+', ' ', text)
 
-    # remove BOM
-    text = text.replace('\ufeff', '')
-
-    # remove brackets, underscore, slash
-    text = re.sub(r'[\[\]_]', '', text)
-
-    # remove all those like dots instead of words, numbers etc.
-    text = re.sub(r'[^\w\s\']', '', text)
-
-    # remove extra spacing
-    text = " ".join(text.split())
-
-    # remove Project Gutenberg header
-    text = re.sub(r'project gutenberg.*?start of the project gutenberg ebook', '', text, flags=re.I | re.S)
-    # remove end of the project Gutenberg footer
-    text = re.sub(r'illustration end of the project gutenberg ebook.*', '', text, flags=re.I | re.S)
-
-    return text
+    # 5. Split into sentences using ., ?, !
+    sentences = re.split(r'[.!?]+', text)
 
 
-clean_data = clean_text(content)
-print(clean_data)
+    # 6. Add boundary tokens
+    tokens = []
+
+    for sentence in sentences:
+
+        # Split sentence into words
+        sentence_tokens = sentence.split()
+
+        # Clean words and remove empty strings
+        clean_tokens = []
+        for word in sentence_tokens:
+            word_clean = re.sub(r"[^\w']+", '', word)  # keep letters, digits, apostrophes
+            if word_clean:
+                clean_tokens.append(word_clean)
+
+        # Add boundary tokens if sentence is not empty
+        if clean_tokens:
+            tokens += ['<s>'] + clean_tokens + ['</s>']
+    return tokens
+
+
+
+clean_text = preprocess(content)
+
+# You can see the clean text. For this, uncomment the below line and run to see clean text.
+#print(clean_text)
