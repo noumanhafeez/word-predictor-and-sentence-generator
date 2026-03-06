@@ -1,10 +1,12 @@
+# data_ingestion.py
 
-# This is the code of data ingestion where we can import the data
-def openfile(path):
-    with open(path, "r") as file:
-        content = file.read()
-    return content
-
-
-# Replace path with your own txt file
-content = openfile('../gutenberg.txt')
+def read_file(path):
+    """
+    Read text file and return content as string.
+    """
+    try:
+        with open(path, "r", encoding="utf-8") as file:
+            return file.read()
+    except FileNotFoundError:
+        print(f"Error: File not found at {path}")
+        return ""
