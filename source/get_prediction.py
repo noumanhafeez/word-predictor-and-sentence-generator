@@ -1,7 +1,18 @@
-from  n_grams import unigram, uni_freq, bi_freq, trig_freq
+# get_prediction.py
 
+# Globals (will be set from main.py)
+uni_freq = None
+bi_freq = None
+tri_freq = None
+total_words = 0
 
-total_words = len(unigram)
+def set_frequencies(uni, bi, tri):
+    """Set the n-gram frequencies for prediction functions."""
+    global uni_freq, bi_freq, tri_freq, total_words
+    uni_freq = uni
+    bi_freq = bi
+    tri_freq = tri
+    total_words = sum(uni_freq.values())
 
 def predict_next_unigram():
     # P(w) = count(w) / total_words
@@ -27,7 +38,7 @@ def predict_next_bigram(word):
 
 def predict_next_trigram(word1, word2):
     # Step 1: Try trigram
-    candidates = [(w3, count) for (w1, w2, w3), count in trig_freq.items() if w1 == word1 and w2 == word2]
+    candidates = [(w3, count) for (w1, w2, w3), count in tri_freq.items() if w1 == word1 and w2 == word2]
     if candidates:
         # P(w3 | w1, w2) = count(w1,w2,w3)/count(w1,w2)
         total_count = sum([c for (w3, c) in candidates])
@@ -46,5 +57,3 @@ def predict_next_trigram(word1, word2):
 
     # Step 4: Backoff to unigram
     return predict_next_unigram()
-
-next_unigram = predict_next_trigram('with', 'the')
