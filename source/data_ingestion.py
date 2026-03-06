@@ -5,6 +5,3 @@ def openfile(path):
         content = file.read()
     return content
 
-
-# Replace path with your own txt file
-content = openfile('../gutenberg.txt')

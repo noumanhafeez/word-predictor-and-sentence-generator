@@ -1,5 +1,5 @@
 import re
-from data_ingestion import content
+from data_ingestion import openfile
 
 
 def preprocess(text):
@@ -43,7 +43,7 @@ def preprocess(text):
 
 
 
-tokens = preprocess(content)
+tokens = preprocess(openfile())
 
 # You can see the clean text. For this, uncomment the below line and run to see clean text.
 #print(clean_text)
