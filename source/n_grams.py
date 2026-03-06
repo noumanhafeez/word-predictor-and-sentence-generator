@@ -1,34 +1,46 @@
-from preprocessing import tokens
+# n_grams.py
 from collections import Counter
 
-def unigram(content):
-    unigram = content
-    return unigram
+def get_unigram(tokens):
+    """
+    Return list of unigrams (single tokens).
+    """
+    return tokens
 
 
-def bigrams(content):
+def get_bigrams(tokens):
+    """
+    Return list of bigrams(2 words) as tuples.
+    """
+
     bigrams = []
-
-    for i in range(len(content) - 1):
-        bigrams.append((content[i], content[i + 1]))
+    for i in range(len(tokens) - 1):
+        bigrams.append((tokens[i], tokens[i + 1]))
     return bigrams
 
 
-def trigrams(content):
+def get_trigrams(tokens):
+    """
+    Return list of trigrams (3 words) as tuples.
+    """
+
     trigrams = []
-    for i in range(len(content) - 2):
-        trigrams.append((content[i], content[i + 1], content[i + 2]))
+    for i in range(len(tokens) - 2):
+        trigrams.append((tokens[i], tokens[i + 1], tokens[i + 2]))
     return trigrams
 
 
-# list of single words
-unigram = unigram(tokens)
-# list of 2-word tuples
-bigram = bigrams(tokens)
-# list of 3-word tuples
-trigram = trigrams(tokens)
+def get_ngram_frequencies(tokens):
+    """
+    Return frequency counters for uni, bi, and trigrams.
+    """
 
+    unigrams = get_unigram(tokens)
+    bigrams = get_bigrams(tokens)
+    trigrams = get_trigrams(tokens)
 
-trig_freq = Counter(trigram)
-bi_freq = Counter(bigram)
-uni_freq = Counter(unigram)
+    uni_freq = Counter(unigrams)
+    bi_freq = Counter(bigrams)
+    tri_freq = Counter(trigrams)
+
+    return uni_freq, bi_freq, tri_freq
