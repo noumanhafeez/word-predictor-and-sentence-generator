@@ -1,6 +1,5 @@
+# Preprocessing.py
 import re
-from data_ingestion import content
-
 
 def preprocess(text):
 
@@ -40,10 +39,3 @@ def preprocess(text):
         if clean_tokens:
             tokens += ['<s>'] + clean_tokens + ['</s>']
     return tokens
-
-
-
-clean_text = preprocess(content)
-
-# You can see the clean text. For this, uncomment the below line and run to see clean text.
-#print(clean_text)
