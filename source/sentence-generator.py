@@ -4,6 +4,15 @@ from get_prediction import predict_next_unigram, predict_next_bigram, predict_ne
 MAX_LEN = 30
 
 def generate_sentence(start_words=None):
+    """
+        Generate a sentence using trigram language model with backoff.
+
+        Parameters:
+            start_words (list of str, optional): 0, 1, or 2 starting words.
+
+        Returns:
+            str: Generated sentence without <s> and </s> tokens.
+        """
 
     # Initialize sentence
     if not start_words:
@@ -36,11 +45,5 @@ def generate_sentence(start_words=None):
 
         sentence.append(next_word)
 
-    return " ".join(sentence[1:])
 
-
-
-
-print(generate_sentence())
-print(generate_sentence(['tarts']))
-print(generate_sentence(['in', 'the']))
+    return " ".join([w for w in sentence[1:] if w != '</s>'])
