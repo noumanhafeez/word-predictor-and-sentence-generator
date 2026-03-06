@@ -1,7 +1,7 @@
-from  n_grams import uni, uni_freq, bi_freq, trig_freq
+from  n_grams import unigram, uni_freq, bi_freq, trig_freq
 
 
-total_words = len(uni)
+total_words = len(unigram)
 
 def predict_next_unigram():
     # P(w) = count(w) / total_words
@@ -48,4 +48,3 @@ def predict_next_trigram(word1, word2):
     return predict_next_unigram()
 
 next_unigram = predict_next_trigram('with', 'the')
-print(next_unigram)

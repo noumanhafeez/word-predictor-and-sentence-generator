@@ -21,14 +21,14 @@ def trigrams(content):
     return trigrams
 
 
-uni = unigram(tokens)
-#print(uni)
+# list of single words
+unigram = unigram(tokens)
+# list of 2-word tuples
+bigram = bigrams(tokens)
+# list of 3-word tuples
+trigram = trigrams(tokens)
 
-bi = bigrams(tokens)
-#print(bi)
-trig = trigrams(tokens)
-#print(trig)
 
-trig_freq = Counter(trig)   # trig is your list of trigrams
-bi_freq = Counter(bi)       # bi is your list of bigrams
-uni_freq = Counter(uni)
+trig_freq = Counter(trigram)
+bi_freq = Counter(bigram)
+uni_freq = Counter(unigram)
