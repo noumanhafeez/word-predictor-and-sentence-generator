@@ -1,4 +1,4 @@
-from get_prediction import predict_next_unigram, predict_next_bigram, predict_next_trigram
+from .get_prediction import predict_next_unigram, predict_next_bigram, predict_next_trigram
 
 
 MAX_LEN = 30
