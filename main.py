@@ -1,8 +1,8 @@
 # main.py
 
-from pipeline import run_pipeline
-from get_prediction import predict_next_unigram, predict_next_bigram, predict_next_trigram
-from sentence_generator import generate_sentence
+from source.user_pipeline  import run_pipeline
+from source.get_prediction import predict_next_unigram, predict_next_bigram, predict_next_trigram
+from source.sentence_generator import generate_sentence
 
 
 def user_interaction():
@@ -32,7 +32,7 @@ def user_interaction():
 
 if __name__ == "__main__":
     # Replace with your Gutenberg file path
-    file_path = '../gutenberg.txt'
+    file_path = 'gutenberg.txt'
 
     # Run the pipeline
     run_pipeline(file_path)
